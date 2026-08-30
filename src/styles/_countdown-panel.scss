@@ -1,0 +1,59 @@
+.countdown-panel {
+  @include liquid-glass(rgba($blue-dark, 0.4), rgba($white, 0.22), $glass-blur);
+  border-radius: $radius-lg;
+  padding: 20px 24px 26px;
+  max-width: 460px;
+  margin: 0 auto;
+
+  &__header {
+    @include flex(center, flex-start, 6px);
+    margin-bottom: 16px;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $blue;
+    opacity: 0.5;
+  }
+
+  &__title {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    color: $orange;
+    margin-left: 6px;
+    letter-spacing: 0.03em;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  &__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba($white, 0.12);
+    border: 1px solid rgba($white, 0.2);
+    border-radius: $radius-sm;
+    padding: 12px 4px;
+  }
+
+  &__number {
+    font-family: $font-mono;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $white;
+  }
+
+  &__label {
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    color: $blue-soft;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+}

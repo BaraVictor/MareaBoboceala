@@ -1,0 +1,40 @@
+.footer {
+  @include liquid-glass(rgba($blue-dark, 0.72), rgba($white, 0.18), $glass-blur);
+  padding: 44px 24px;
+
+  &__inner {
+    max-width: $max-width;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+    color: $white;
+  }
+
+  &__logo-img {
+    height: 44px;
+    width: auto;
+  }
+
+  &__links {
+    display: flex;
+    gap: 18px;
+    color: $blue;
+
+    a {
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+
+  &__copy {
+    font-size: 0.8rem;
+    color: $grey-footer-text;
+    margin: 0;
+  }
+}

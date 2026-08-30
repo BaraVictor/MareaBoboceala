@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+@import "variables";
+@import "mixins";
+
+/* ---------- Reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  font-family: $font-body;
+  background: rgba($off-white, 0.75);
+  color: $black;
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-display;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+}
+
+/* ---------- Shared: buttons ---------- */
+.btn {
+  @include flex(center, center, 6px);
+  display: inline-flex;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+
+  &--cta {
+    background: $orange;
+    color: $black;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba($orange, 0.35);
+    }
+  }
+
+  &--sm {
+    padding: 9px 18px;
+    font-size: 0.85rem;
+  }
+
+  &--ghost {
+    @include liquid-glass(rgba($white, 0.3), rgba($white, 0.55), 14px);
+    color: $blue-dark;
+
+    &:hover {
+      background: rgba($white, 0.5);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* ---------- Shared: liquid glass utility ---------- */
+.glass {
+  @include liquid-glass(rgba($white, 0.12), $glass-border-dark, $glass-blur);
+
+  &--light {
+    @include liquid-glass(rgba($white, 0.45), $glass-border-light, $glass-blur);
+  }
+}
+
+/* ---------- Shared: eyebrow / section titles ---------- */
+.eyebrow {
+  @include flex(center, flex-start, 6px);
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $blue;
+  margin-bottom: 14px;
+
+  &--light {
+    color: $blue-soft;
+  }
+}
+
+.section {
+  position: relative;
+  padding: 90px 24px;
+
+  &--dark {
+    background: rgba($blue-dark, 0.82);
+    backdrop-filter: blur(6px);
+  }
+
+  &__wave {
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+  }
+
+  &__inner {
+    position: relative;
+    max-width: $max-width;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    font-weight: 700;
+    color: $blue-dark;
+    max-width: 640px;
+    margin: 0 0 40px;
+    line-height: 1.2;
+
+    &--light {
+      color: $white;
+    }
+  }
+}
+
+/* ---------- Shared: cards & grid ---------- */
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+
+  @include tablet-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  padding: 28px 24px;
+  border-radius: $radius-lg;
+
+  &--dark {
+    @include liquid-glass(rgba($white, 0.1), $glass-border-dark, $glass-blur);
+    color: $white;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      background: rgba($white, 0.16);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.5),
+        0 14px 40px rgba(10, 15, 30, 0.24);
+    }
+  }
+
+  &__icon {
+    width: 52px;
+    height: 52px;
+    @include flex(center, center);
+    border-radius: $radius-md;
+    background: $orange;
+    color: $black;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin: 0 0 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    opacity: 0.85;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+  }
+}
+
+/* ---------- Shared: dots (motiv decorativ) ---------- */
+.dots {
+  display: flex;
+  gap: 8px;
+
+  &__circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+
+    &--orange {
+      background: $orange;
+    }
+    &--green {
+      background: $green;
+    }
+    &--blue {
+      background: $blue;
+    }
+  }
+}
+
+/* ---------- Keyframes & motion ---------- */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@include reduced-motion {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Component partials ---------- */
+@import "blobs";
+@import "photo-carousel";
+@import "intro";
+@import "nav";
+@import "hero";
+@import "countdown-panel";
+@import "program";
+@import "locatie";
+@import "galerie";
+@import "osfiir";
+@import "footer";

@@ -1,0 +1,31 @@
+// Paletă de culori — identitate reală OSFIIR (extrasă din contul de Instagram)
+$blue: #3f62b2; // albastru principal de brand
+$blue-dark: #24345e; // variantă închisă a albastrului, pt secțiuni de contrast
+$orange: #f28d28; // accent energic — CTA, forme de val, highlights
+$green: #39a54b; // accent secundar — folosit punctual (puncte decorative, detalii mici)
+$white: #ffffff;
+$off-white: #f5f7fa; // fundal principal, ușor cald
+$black: #151a21; // negru/antracit — folosit doar în intro
+
+// Culori secundare derivate
+$blue-soft: #b9c9e8; // eyebrow/text pe fond închis
+$blue-muted: #46587a; // text secundar pe fond deschis
+$grey-panel: #eef2f6; // fundal tab-panel (fallback fără glass)
+$grey-footer-text: #a9b8d6;
+
+// Fonturi — Montserrat peste tot, pentru un aspect modern și unitar
+$font-display: "Montserrat", sans-serif;
+$font-body: "Montserrat", sans-serif;
+$font-mono: "Montserrat", sans-serif;
+
+// Layout
+$max-width: 1080px;
+$max-width-nav: 1160px;
+$radius-lg: 22px;
+$radius-md: 16px;
+$radius-sm: 12px;
+
+// Glass (liquid glass)
+$glass-blur: 22px;
+$glass-border-light: rgba(255, 255, 255, 0.4);
+$glass-border-dark: rgba(255, 255, 255, 0.16);

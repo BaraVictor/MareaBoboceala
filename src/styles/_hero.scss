@@ -1,0 +1,169 @@
+/* Definim animația pentru bara de progres */
+@keyframes fillProgress {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 24px;
+  background-color: #111;
+
+  &__bg-carousel {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &__bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out; /* Tranziție și mai lentă, elegantă */
+    pointer-events: none;
+
+    &.is-active {
+      opacity: 1;
+    }
+  }
+
+  &__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+    z-index: 2;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 800px;
+    color: #fff;
+    pointer-events: none;
+  }
+
+  &__title {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    margin: 0 0 24px;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+
+    &-accent {
+      color: #3F62B2;
+    }
+  }
+
+  &__sub {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    line-height: 1.5;
+    font-weight: 500;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  /* --- BUTOANE DE NAVIGARE (Desktop) --- */
+  &__nav-btn {
+    display: none; /* Ascunse implicit pe mobil */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &--left { left: 24px; }
+    &--right { right: 24px; }
+
+    /* Le afișăm doar pe ecrane mai mari */
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  /* --- INDICATORII DE PAGINARE + PROGRESS BAR --- */
+  &__pagination {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+
+  &__dot {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden; 
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    -webkit-tap-highlight-color: transparent;
+
+    /* Când este activă: se face pilulă */
+    &.is-active {
+      width: 50px;
+      background: rgba(255, 255, 255, 0.2); 
+      
+      /* Bara albă care se umple FLUID */
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; /* Lățime maximă din start */
+        height: 100%;
+        background: #fff;
+        border-radius: 20px;
+        
+        /* Magia pentru fluiditate: scalăm dinspre stânga spre dreapta */
+        transform-origin: left center; 
+        transform: scaleX(0); /* Pornește de la zero */
+        will-change: transform; /* Spune browserului să folosească placa video */
+        
+        /* 8s trebuie să fie la fel ca SLIDE_DURATION din React */
+        animation: fillProgress 8s linear forwards; 
+      }
+    }
+
+    &:hover:not(.is-active) {
+      background: rgba(255, 255, 255, 0.6);
+    }
+  }
+}

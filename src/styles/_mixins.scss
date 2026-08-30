@@ -1,0 +1,54 @@
+// Breakpoints
+@mixin mobile-up {
+  @media (min-width: 700px) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: 780px) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: 860px) {
+    @content;
+  }
+}
+
+@mixin nav-desktop-up {
+  @media (min-width: 860px) {
+    @content;
+  }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// Flex helper
+@mixin flex($align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+// Liquid glass — sticlă cu highlight de suprafață, ca în design-urile moderne (iOS liquid glass)
+@mixin liquid-glass($tint: rgba(255, 255, 255, 0.14), $border: rgba(255, 255, 255, 0.35), $blur: 26px) {
+  position: relative;
+  background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0) 45%
+    ),
+    $tint;
+  backdrop-filter: blur($blur) saturate(180%);
+  -webkit-backdrop-filter: blur($blur) saturate(180%);
+  border: 1px solid $border;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 14px rgba(255, 255, 255, 0.04), 0 8px 32px rgba(15, 22, 45, 0.16);
+}

@@ -1,0 +1,148 @@
+/* Containerul Navbar-ului - pilulă plutitoare */
+.nav {
+  position: fixed;
+  top: 20px; /* Detașat de sus */
+  left: 50%; /* Pentru centrare */
+  transform: translateX(-50%); /* Centrare perfectă pe orizontală */
+  width: calc(100% - 2rem); /* Spațiu lateral pe ecrane mici */
+  max-width: 1000px; /* Dimensiunea maximă a pilulei pe desktop */
+  z-index: 1000;
+  border-radius: 50px; /* Forma de pilulă */
+  
+  /* Tranziție separată pentru o glisare foarte fină dinspre sus */
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.3s ease;
+}
+
+/* Starea ASCUNSĂ (activă doar prima dată, pe timpul intro-ului) */
+.nav.nav--hidden {
+  opacity: 0;
+  pointer-events: none; 
+  /* Îl ducem 100px mai sus, păstrând centrarea pe orizontală (-50%) */
+  transform: translate(-50%, -100px); 
+}
+
+/* --- MAGIA LIQUID GLASS --- */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.75); /* Opacitate mărită pentru lizibilitate */
+  backdrop-filter: blur(16px); /* Blur crescut */
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Contur vizibil */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Umbră difuză pentru plutire */
+}
+
+/* Layout interior */
+.nav__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Logo */
+.nav__logo {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Elimină cutia albastră la click pe telefon */
+}
+
+.nav__logo-img {
+  height: 36px;
+  object-fit: contain;
+}
+
+/* Link-uri Desktop și Mobil - stiluri comune */
+.nav__link, .nav__mobile-link {
+  background: none;
+  border: none;
+  color: #1a1a1a; 
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* Elimină cutia albastră */
+  transition: color 0.2s ease;
+}
+
+.nav__link {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.nav__mobile-link {
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+/* Doar cuvântul se face albastru, la hover și la apăsare */
+.nav__link:hover, .nav__mobile-link:hover,
+.nav__link:active, .nav__mobile-link:active {
+  color: #0056b3; 
+}
+
+/* Container link-uri Desktop */
+.nav__links {
+  display: none;
+  gap: 1.5rem;
+}
+
+/* Buton Meniu (Hamburger) */
+.nav__toggle {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Elimină cutia albastră */
+}
+
+/* Meniu Mobil (Dropdown) - animat fluid */
+.nav__mobile {
+  position: absolute;
+  top: calc(100% + 15px); 
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+  border-radius: 24px; 
+  
+  /* Setări pentru animație fluidă */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-15px) scale(0.98); /* Începe sus și un pic micșorat */
+  pointer-events: none; 
+  
+  will-change: transform, opacity; /* Optimizare pentru performanța pe mobil */
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.4s;
+}
+
+/* Clasa adăugată dinamic din React */
+.nav__mobile.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1); /* Revine la forma și poziția normală */
+  pointer-events: auto; 
+}
+
+/* --- RESPONSIVITATE PENTRU DESKTOP --- */
+@media (min-width: 768px) {
+  .nav__links {
+    display: flex; 
+  }
+  
+  .nav__toggle {
+    display: none; 
+  }
+  
+  .nav__mobile {
+    display: none; 
+  }
+}

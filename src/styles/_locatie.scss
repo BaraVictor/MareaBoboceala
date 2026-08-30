@@ -1,0 +1,46 @@
+.locatie {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+
+  @include desktop-up {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  &__text {
+    color: #d8e3ed;
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 20px;
+  }
+
+  &__row {
+    @include flex(center, flex-start, 10px);
+    color: $white;
+    font-size: 0.92rem;
+
+    em {
+      color: $blue-soft;
+      font-style: italic;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+.map-placeholder {
+  @include liquid-glass(rgba($white, 0.06), rgba($white, 0.28), $glass-blur);
+  border: 1.5px dashed rgba($white, 0.35);
+  border-radius: $radius-lg;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: $white;
+
+  small {
+    color: $blue-soft;
+  }
+}

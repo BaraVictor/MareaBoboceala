@@ -1,0 +1,19 @@
+.osfiir {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: center;
+  text-align: center;
+
+  @include desktop-up {
+    grid-template-columns: 160px 1fr;
+    text-align: left;
+  }
+
+  &__gear {
+    width: 100px;
+    height: auto;
+    margin: 0 auto;
+    animation: spin-slow 14s linear infinite;
+  }
+}
