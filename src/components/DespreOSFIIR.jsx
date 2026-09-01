@@ -26,7 +26,7 @@ export default function DespreOSFIIR() {
                   OSFIIR - Organizația Studenților Facultății de Inginerie Industrială și Robotică
                 </h2>
                 <p className="osfiir__text">
-                  Suntem echipa care ține integrarea bobocilor, evenimentele și energia 
+                  Suntem asociația care ține integrarea bobocilor, evenimentele și energia 
                   facultății în priză tot anul. Marea Boboceală e proiectul nostru 
                   preferat: locul unde bobocii devin parte din gașcă, nu doar din facultate.
                 </p>
