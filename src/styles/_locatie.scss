@@ -1,46 +1,314 @@
-.locatie {
+/* Animație continuă de lumini pentru Mecano (Violet) */
+@keyframes partyGlow {
+  0% {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 70px rgba(139, 92, 246, 0.5), inset 0 0 30px rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.8);
+  }
+  100% {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+  }
+}
+
+/* Animație continuă de lumini pentru Facultate (Albastru academic) */
+@keyframes academicGlow {
+  0% {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 60px rgba(59, 130, 246, 0.45), inset 0 0 25px rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.7);
+  }
+  100% {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+}
+
+.locatie-section {
+  background-color: #020617;
+  padding: 60px 24px;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__eyebrow {
+    display: block;
+    font-family: monospace;
+    color: #3b82f6;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  &__main-title {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.locatie-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.locatie-header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.locatie-switcher {
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 6px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+
+  &.state-0 { border-color: rgba(59, 130, 246, 0.2); }
+  &.state-1 { border-color: rgba(139, 92, 246, 0.3); }
+}
+
+.locatie-switch-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .locatie-switcher.state-0 & .is-active,
+  .locatie-switcher.state-0 &.is-active {
+    background: rgba(59, 130, 246, 0.25);
+    color: #ffffff;
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  }
+
+  .locatie-switcher.state-1 & .is-active,
+  .locatie-switcher.state-1 &.is-active {
+    background: rgba(139, 92, 246, 0.3);
+    color: #ffffff;
+    border: 1px solid rgba(139, 92, 246, 0.6);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  }
+}
+
+/* CUTIA MARE DE STICLĂ */
+.locatie-card-box {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 36px;
+  padding: 48px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1.3fr; /* Am mărit spațiul din dreapta pentru ca harta să fie foarte lată */
   gap: 40px;
   align-items: center;
+  transition: all 0.5s ease;
 
-  @include desktop-up {
-    grid-template-columns: 1.1fr 0.9fr;
+  &.state-0 {
+    animation: academicGlow 3s infinite ease-in-out;
+    .locatie-card__eyebrow { color: #60a5fa; }
+    .locatie__row {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
   }
 
-  &__text {
-    color: #d8e3ed;
-    line-height: 1.7;
-    max-width: 480px;
-    margin-bottom: 20px;
-  }
-
-  &__row {
-    @include flex(center, flex-start, 10px);
-    color: $white;
-    font-size: 0.92rem;
-
-    em {
-      color: $blue-soft;
-      font-style: italic;
-      font-size: 0.85rem;
+  &.state-1 {
+    animation: partyGlow 3s infinite ease-in-out;
+    .locatie-card__eyebrow { color: #c084fc; }
+    .locatie__row {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #e9d5ff;
     }
   }
 }
 
-.map-placeholder {
-  @include liquid-glass(rgba($white, 0.06), rgba($white, 0.28), $glass-blur);
-  border: 1.5px dashed rgba($white, 0.35);
-  border-radius: $radius-lg;
-  min-height: 220px;
+.locatie-left-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: $white;
+  height: 100%;
+}
 
-  small {
-    color: $blue-soft;
+.locatie-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 380px;
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.locatie-card {
+  &__eyebrow {
+    display: block;
+    font-family: monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  &__title {
+    font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #ffffff;
+  }
+}
+
+.locatie {
+  &__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #94a3b8;
+    margin: auto 0;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 16px 20px;
+    border-radius: 16px;
+    margin-top: auto;
+
+    em {
+      color: #64748b;
+      font-style: normal;
+    }
+  }
+
+  &__pin-icon {
+    flex-shrink: 0;
+  }
+}
+
+/* HARTA PE DESKTOP: Ocupă 100% din lățimea coloanei din dreapta, dreptunghiulară și lată */
+.map-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.map-container {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  width: 200%;
+  height: 380px; /* Înălțime optimă, lată și elegantă */
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  }
+}
+
+/* RESPONSIVITATE PENTRU TELEFOANE: Box lung și elemente aerisite, spațiate generos */
+@media (max-width: 768px) {
+  .locatie-section { padding: 40px 16px; }
+
+  .locatie-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .locatie-switcher {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .locatie-switch-btn { flex: 1; text-align: center; }
+
+  .locatie-card-box {
+    padding: 36px 20px; /* Box-ul este mai lung și mai generos */
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Spațiu mare și aerisit între secțiunile principale din box */
+  }
+
+  .locatie-content {
+    display: contents;
+  }
+
+  /* 1. Eticheta și titlul sus, cu spațiu sub ele */
+  .locatie-top-part {
+    order: 1;
+    margin-bottom: 8px;
+  }
+
+  /* 2. Descrierea aerisită, cu spațiu generos dedesubt */
+  .locatie__text {
+    order: 2;
+    margin: 0 0 16px 0;
+    line-height: 1.7;
+  }
+
+  /* 3. Harta centrată, așezată la distanță confortabilă */
+  .map-wrapper { 
+    order: 3; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .map-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  /* 4. Pin-ul / adresa jos de tot, separat cu spațiu amplu față de hartă */
+  .locatie__row {
+    order: 4;
+    margin-top: 12px;
   }
 }

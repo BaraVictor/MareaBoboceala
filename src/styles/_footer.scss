@@ -1,6 +1,8 @@
 .footer {
   @include liquid-glass(rgba($blue-dark, 0.72), rgba($white, 0.18), $glass-blur);
   padding: 44px 24px;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 
   &__inner {
     max-width: $max-width;
@@ -20,14 +22,25 @@
 
   &__links {
     display: flex;
-    gap: 18px;
+    gap: 20px;
     color: $blue;
 
     a {
-      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.25s ease;
 
       &:hover {
-        color: $orange;
+        color: #ffffff;
+        background: rgba(59, 130, 246, 0.2);
+        border-color: rgba(59, 130, 246, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
       }
     }
   }

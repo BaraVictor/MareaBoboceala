@@ -2,9 +2,6 @@ import { Mail } from "lucide-react";
 import { SOCIALS } from "../config";
 import logoFull from "../assets/logo-full.png";
 
-/* Lucide a eliminat iconițele de brand (Instagram, Facebook etc.) din v1.0
-   din motive legale — le definim local, ca SVG-uri simple, în același stil
-   line-art ca restul iconițelor din site. */
 function InstagramIcon({ size = 20 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -23,6 +20,15 @@ function FacebookIcon({ size = 20 }) {
   );
 }
 
+/* Iconiță de TikTok cu bara verticală îngroșată și plină */
+function TikTokIcon({ size = 20 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-4.45v13.67a2.89 2.89 0 1 1-2.5-2.86v-3.75a6.64 6.64 0 1 0 6.25 6.61V9.58a8.21 8.21 0 0 0 4.47 1.36v-3.4c-.65 0-1.34-.3-1.55-.85z" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -35,6 +41,9 @@ export default function Footer() {
           </a>
           <a href={SOCIALS.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">
             <FacebookIcon size={20} />
+          </a>
+          <a href={SOCIALS.tiktok || "https://www.tiktok.com/@o.s.f.i.i.r?is_from_webapp=1&sender_device=pc"} target="_blank" rel="noreferrer" aria-label="TikTok">
+            <TikTokIcon size={20} />
           </a>
           <a href={`mailto:${SOCIALS.email}`} aria-label="Email">
             <Mail size={20} />

@@ -1,30 +1,249 @@
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+.galerie-section {
+  background-color: #020617;
+  padding: 60px 24px;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
 
-  @include mobile-up {
-    grid-template-columns: repeat(3, 1fr);
+  &__inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__eyebrow {
+    display: block;
+    font-family: monospace;
+    color: #f59e0b; /* Auriu cald pentru etichetă */
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  &__main-title {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #ffffff 0%, #fde68a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
-.gallery-item {
-  aspect-ratio: 4 / 3;
-  border-radius: 14px;
-  background: linear-gradient(135deg, $blue 0%, $blue-dark 100%);
-  border: 1px solid rgba($white, 0.25);
-  box-shadow: 0 8px 24px rgba(36, 52, 94, 0.18);
-  color: $white;
+/* Am mutat antetul mai în dreapta (aliniat cu interiorul box-ului mare) */
+.galerie-header {
   display: flex;
   flex-direction: column;
+  padding-left: 60px; // Împinge titlul și eticheta spre dreapta pe desktop
+}
+
+/* ANIMAȚIA DE GLOW GALBEN PENTRU BOX (EFECT DE CUFĂR CU AUR) */
+@keyframes treasureBoxGlow {
+  0%, 100% {
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6), 0 0 25px rgba(245, 158, 11, 0.25), inset 0 0 20px rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6), 0 0 55px rgba(245, 158, 11, 0.5), inset 0 0 35px rgba(245, 158, 11, 0.25);
+    border-color: rgba(251, 191, 36, 0.8);
+  }
+}
+
+.treasure-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  /* Glow ambiental exterior */
+  .treasure-glow-effect {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.25) 0%, rgba(234, 179, 8, 0.08) 50%, transparent 80%);
+    border-radius: 44px;
+    filter: blur(35px);
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+.treasure-carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  z-index: 1;
+}
+
+.treasure-carousel {
+  position: relative;
+  flex: 1;
+  background: rgba(15, 23, 42, 0.65); 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 40px;
+  padding: 40px;
+  overflow: hidden;
+  touch-action: pan-y;
+  
+  /* Aici se aplică animația de glowing galben pe casetă */
+  animation: treasureBoxGlow 3.5s infinite ease-in-out;
+}
+
+/* Săgețile de navigare */
+.treasure-arrow-btn {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fde68a;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: transform 0.25s ease;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 
   &:hover {
-    transform: scale(1.03);
+    background: rgba(245, 158, 11, 0.25);
+    border-color: rgba(251, 191, 36, 0.8);
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+  }
+}
+
+/* Căsuța interioară pentru poză */
+.treasure-viewport-box {
+  background: rgba(2, 6, 23, 0.7);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-top: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 26px;
+  padding: 14px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+}
+
+.treasure-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #020617;
+}
+
+.treasure-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  transform: scale(1.05);
+  pointer-events: none;
+
+  &.is-active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.treasure-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(2, 6, 23, 0.9), transparent);
+  color: #fde68a;
+  font-family: monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.treasure-dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.treasure-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  overflow: hidden;
+
+  &:hover {
+    background: rgba(245, 158, 11, 0.6);
+  }
+
+  &.is-active {
+    width: 52px;
+    height: 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.6);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+  }
+}
+
+.treasure-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  border-radius: 6px;
+}
+
+/* RESPONSIVITATE PENTRU TELEFOANE */
+@media (max-width: 768px) {
+  .galerie-header {
+    padding-left: 0; /* Pe telefon scoatem decalajul ca să fie centrat normal */
+    text-align: center;
+  }
+
+  .treasure-carousel {
+    padding: 20px 16px;
+    border-radius: 24px;
+  }
+
+  .treasure-arrow-btn {
+    display: none;
+  }
+
+  .treasure-viewport-box {
+    padding: 8px;
+    border-radius: 16px;
+  }
+  
+  .treasure-viewport {
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+  }
+
+  .treasure-dots-container {
+    display: none;
   }
 }

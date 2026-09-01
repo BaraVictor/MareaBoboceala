@@ -22,7 +22,7 @@ export default function Nav() {
       // Dacă e prima dată, ascundem navbar-ul și îl afișăm după terminarea intro-ului
       const timer = setTimeout(() => {
         setIsVisible(true);
-      }, 2800); // 2800ms acoperă cele 2.5s + tranziția de zoom
+      }, 3500); // 2800ms acoperă cele 2.5s + tranziția de zoom
       return () => clearTimeout(timer);
     } else {
       // Dacă utilizatorul a mai navigat pe site/a dat refresh, apare instant
